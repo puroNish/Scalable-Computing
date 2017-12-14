@@ -10,7 +10,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
@@ -38,7 +37,7 @@ public class RepoCCRestServer {
 	}*/
 	
 	private static void populateRepoListIfEmpty() throws IOException {
-		if(!repoListEmpty) {
+		if(repoListEmpty) {
 			RepoCCRestServer obj = new RepoCCRestServer();
 			repoList = obj.createRepo();
 			repoListEmpty = false;
@@ -48,7 +47,7 @@ public class RepoCCRestServer {
 	
 	@GET
 	@Path("/getRepoDetails")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String getRepoDetails() throws IOException {
 		populateRepoListIfEmpty();
 		String repoDetails;
@@ -58,10 +57,13 @@ public class RepoCCRestServer {
 	
 	@GET
 	@Path("/assignCommitToMe/{clientUniqueID}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String assignCommitToClient(@PathParam("clientUniqueID") String clientUniqueID) throws IOException {
 		populateRepoListIfEmpty();
 		for(RepoClientBean commitObj : repoList) {
+			if(commitObj.getClientAssigned() && !commitObj.getCcReceived() && commitObj.getClientUniqueID().equals(clientUniqueID)) {
+				return new String("Task already assigned to the client. Commit ID ***"+commitObj.getRepoCommit());
+			}
 			if(!commitObj.getClientAssigned()) {
 				commitObj.setClientAssigned(true);
 				commitObj.setClientUniqueID(clientUniqueID);
@@ -73,10 +75,10 @@ public class RepoCCRestServer {
 	
 	@GET
 	@Path("/sendCC/{clientUniqueID}/{ccReceived}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public boolean resultCollection(@PathParam("clientUniqueID") String clientUniqueID, @PathParam("ccReceived") String ccReceived) {
 		for(RepoClientBean commitObj : repoList) {
-			if(commitObj.getClientAssigned() && clientUniqueID.equals(commitObj.getClientAssigned().toString())) {
+			if(commitObj.getClientAssigned() && clientUniqueID.equals(commitObj.getClientUniqueID().toString())) {
 				commitObj.setCcReceived(true);
 				commitObj.setCc(Integer.parseInt(ccReceived));
 				return true;
@@ -87,7 +89,7 @@ public class RepoCCRestServer {
 	
 	@GET
 	@Path("/getCCForFile/{commitId}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String getCCForCommit(@PathParam("commitId") String commitId) {
 		for(RepoClientBean commitObj : repoList) {
 			if(commitObj.getClientAssigned() && commitId.equals(commitObj.getRepoCommit().toString())) {
@@ -100,7 +102,7 @@ public class RepoCCRestServer {
 
 	@GET
 	@Path("/serverStatus")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String pingServer() {
 		return new String("Server is working ");
 	}

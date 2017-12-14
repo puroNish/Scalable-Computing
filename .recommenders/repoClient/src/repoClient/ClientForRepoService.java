@@ -10,7 +10,7 @@ import java.net.URL;
 
 import javax.ws.rs.core.MediaType;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;

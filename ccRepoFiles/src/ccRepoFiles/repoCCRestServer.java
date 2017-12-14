@@ -10,7 +10,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.FileUtils;
 import org.eclipse.jgit.api.Git;
@@ -55,7 +54,7 @@ public class repoCCRestServer {
 	
 	@GET
 	@Path("/getRepoDetails")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String getRepoDetails() throws IOException {
 		populateRepoListIfEmpty();
 		String repoDetails;
@@ -65,7 +64,7 @@ public class repoCCRestServer {
 	
 	@GET
 	@Path("/assignCommitToMe/{clientUniqueID}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String assignCommitToClient(@PathParam("clientUniqueID") String clientUniqueID) throws IOException {
 		populateRepoListIfEmpty();
 		for(RepoClientBean commitObj : repoList) {
@@ -83,7 +82,7 @@ public class repoCCRestServer {
 	
 	@GET
 	@Path("/sendCC/{clientUniqueID}/{ccReceived}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public boolean resultCollection(@PathParam("clientUniqueID") String clientUniqueID, @PathParam("ccReceived") String ccReceived) {
 		for(RepoClientBean commitObj : repoList) {
 			if(commitObj.getClientAssigned() && clientUniqueID.equals(commitObj.getClientUniqueID().toString())) {
@@ -97,7 +96,7 @@ public class repoCCRestServer {
 	
 	@GET
 	@Path("/getCCForFile/{commitId}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String getCCForCommit(@PathParam("commitId") String commitId) {
 		for(RepoClientBean commitObj : repoList) {
 			if(commitObj.getClientAssigned() && commitId.equals(commitObj.getRepoCommit().toString())) {
@@ -110,7 +109,7 @@ public class repoCCRestServer {
 
 	@GET
 	@Path("/serverStatus")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String pingServer() {
 		return new String("Server is working ");
 	}
@@ -171,7 +170,7 @@ public class repoCCRestServer {
 
 	@GET
 	@Path("/getCCForFile")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Consumes(javax.ws.rs.core.MediaType.APPLICATION_JSON)
 	// @Produces(MediaType.APPLICATION_JSON)
 	public repoCCBean calculateCCForFile(repoDetailsBean inputJSON) throws IOException {
 		repoCCBean responseBean = new repoCCBean();
@@ -187,7 +186,7 @@ public class repoCCRestServer {
 
 	@GET
 	@Path("/cloneRepo")
-	@Consumes(MediaType.TEXT_PLAIN)
+	@Consumes(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String justCloneRepo()
 			throws RevisionSyntaxException, AmbiguousObjectException, IncorrectObjectTypeException, IOException {
 		File tempFile1 = new File("/tempFileJava");
@@ -263,22 +262,22 @@ public class repoCCRestServer {
 
 	@GET
 	@Path("/testServer")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String restChalaKeNahi() {
 		return new String("Chala BC");
 	}
 
 	@GET
 	@Path("/mainServer")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public void mainWaalaKaam() {
 
 	}
 
 	@GET
 	@Path("/getDataFromClient/{clientId}/{CC}")
-	@Produces(MediaType.TEXT_PLAIN)
-	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces(javax.ws.rs.core.MediaType.TEXT_PLAIN)
+	@Consumes(javax.ws.rs.core.MediaType.TEXT_PLAIN)
 	public String getDataFromClient(@PathParam("clientId") String clientId, @PathParam("CC") String cc) {
 		String response = new String("Value received from :: " + clientId + "\n CC received :: " + cc);
 		return response;

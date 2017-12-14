@@ -25,5 +25,6 @@
 	<classpathentry kind="lib" path="C:/Users/nishp/Downloads/slf4j-1.7.25/slf4j-1.7.25/slf4j-simple-1.7.25.jar"/>
 	<classpathentry kind="lib" path="C:/Users/nishp/Downloads/Compressed/org.eclipse.team.cvs.ssh2_0.1.3-src/org.eclipse.team.cvs.ssh2_0.1.3/jsch-0.1.17.jar"/>
 	<classpathentry kind="lib" path="C:/Users/nishp/Downloads/Compressed/commons-io-2.6-bin/commons-io-2.6/commons-io-2.6.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAX-RS-API"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
