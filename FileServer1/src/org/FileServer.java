@@ -7,10 +7,8 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -21,11 +19,11 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 @Path("/FileServer1")
 public class FileServer {
 	final static String nameServerAddress = new String("http://localhost:8080/NameServer/rest/NameServer");
-	final static String workingDir = "C:\\FileServer\\FileServer1";
+	public final static String workingDir = "C:\\FileServer\\FileServer1";
 	final static String serverName = new String("FileServer1");
 	final static String serverUrl = new String("127.0.0.1");
 	final static String serverPort = new String("8080");
-	static ArrayList<FileMetaServerDataBean> listOfFiles = new ArrayList<FileMetaServerDataBean>();
+	public final static ArrayList<FileMetaServerDataBean> listOfFiles = new ArrayList<FileMetaServerDataBean>();
 	static {
 		loadFileSystem();
 		registerServer();
@@ -36,13 +34,14 @@ public class FileServer {
 		registerServer();
 
 		FileServer obj = new FileServer();
-//		Response response = obj.getFile("one.txt");
-//		System.out.println(response.getEntity().toString());
+		// Response response = obj.getFile("one.txt");
+		// System.out.println(response.getEntity().toString());
 		System.out.println(obj.testServer());
-/*        Response response = target.request()
-                .header(HttpHeaders.COOKIE, this.cookie)
-                .header(HttpHeaders.CONTENT_TYPE, "multipart/mixed")
-                .accept("multipart/mixed").get();*/
+		/*
+		 * Response response = target.request() .header(HttpHeaders.COOKIE, this.cookie)
+		 * .header(HttpHeaders.CONTENT_TYPE, "multipart/mixed")
+		 * .accept("multipart/mixed").get();
+		 */
 
 	}
 
@@ -64,20 +63,19 @@ public class FileServer {
 		}
 	}
 
-	@GET
-	@Path("/download/{fileName}")
-	
-	@Produces(MediaType.APPLICATION_OCTET_STREAM)
-	public Response getFile(@PathParam("fileName") String fileName) {
-		for (FileMetaServerDataBean tempBean : listOfFiles) {
-			if (tempBean.getFileName().equals(fileName)) {
-				File file = new File(workingDir.concat("\\").concat(fileName));
-				return Response.ok(file, MediaType.APPLICATION_OCTET_STREAM)
-						.header("Content-Disposition", "attachment; filename=\"" + file.getName() + "\"").build();
-			}
-		}
-		return Response.serverError().build();
-	}
+	/*
+	 * @GET
+	 * 
+	 * @Path("/download/{fileName}")
+	 * 
+	 * @Produces(MediaType.APPLICATION_OCTET_STREAM) public Response
+	 * getFile(@PathParam("fileName") String fileName) { for (FileMetaServerDataBean
+	 * tempBean : listOfFiles) { if (tempBean.getFileName().equals(fileName)) { File
+	 * file = new File(workingDir.concat("\\").concat(fileName)); return
+	 * Response.ok(file, MediaType.APPLICATION_OCTET_STREAM)
+	 * .header("Content-Disposition", "attachment; filename=\"" + file.getName() +
+	 * "\"").build(); } } return Response.serverError().build(); }
+	 */
 
 	@POST
 	@Path("/registerServer")
