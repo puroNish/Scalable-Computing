@@ -50,3 +50,16 @@ Security Service
 Replication
 Caching
 Lock Service
+
+--------------------------------------------------------------------------------------------------------------------------------
+Kerberos 3 key authentication POC 
+As a POC, a Three Server system has been implemented to mock an authentication process which successfully authenticates the user.
+
+KerberosPOCServer :: This Server mocks the server which keeps the lists of authenticated users with their keys(keyOne) and the authenticated servers and their keys(keyTwo).
+It accepts requests from clients and with their username and password.
+As a mockup, we use the ‘username’ as the data . The KerberosPOCServer encrypts the ‘data’ with keyTwo as key. It then encrypts the token with another key : keyOne. 
+It sends back the encrypted token to the client which could only be decrypted by the keyOne. 
+
+The client then decrypts the encrypted package and extracts the token. 
+
+
