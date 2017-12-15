@@ -22,8 +22,6 @@ public class KerberosImplementationPOC {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		KerberosImplementationPOC obj = new KerberosImplementationPOC();
-		String str = new String("´:”™ƒ$sJb?'»Ä …þÍŠŸÄ)“");
-		System.out.println(obj.authenticateClient("Nishant Purohit", str));
 	}
 	
 	@POST

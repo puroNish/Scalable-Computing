@@ -39,7 +39,7 @@ public class KerberosClient {
 	public void getToken() throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
-		WebResource resource = client.resource(autheticationServerAddress).path(userName).path("FileServer1").path(clientID);
+		WebResource resource = client.resource(autheticationServerAddress).path(userName).path(clientID).path("FileServer1");
 		String response = resource.type(MediaType.TEXT_PLAIN).get(String.class);
 		System.out.println(response);
 		String token = decrypt(response,keyOne);
