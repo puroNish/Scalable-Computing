@@ -1,9 +1,10 @@
-Nishant Purohit
-Student ID :: 17319840
+Nishant Purohit -
+Student ID :: 17319840 - 
 M.Sc. Computer Science
 
 
 Cyclomatic Complexity
+
 As per Wikipedia ,Cyclomatic complexity is a software metric (measurement), used to indicate the complexity of a program. It is a quantitative measure of the number of linearly independent paths through a program's source code.
 
 I have calculated the cyclomatic complexity as per the McCabe Cyclomatic Complexity (MCC) with the following algorithm :
