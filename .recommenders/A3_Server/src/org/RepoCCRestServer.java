@@ -42,7 +42,6 @@ public class RepoCCRestServer {
 			repoList = obj.createRepo();
 			repoListEmpty = false;
 		}
-		
 	}
 	
 	@GET
