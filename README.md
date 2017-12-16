@@ -62,4 +62,4 @@ It sends back the encrypted token to the client which could only be decrypted by
 
 The client then decrypts the encrypted package and extracts the token. 
 
-
+The client then uses this token to authenticate itself to the File Server. The File serverkeeps the keyTwo. It decrypts the token with its keyTwo and extracts the details of the client, in this case the 'username'. If there is any mismatch in the details extracted from the token and the details received from the clinet, the authorisation fails.
